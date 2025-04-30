@@ -158,16 +158,34 @@
 
   <script>
     function downloadPDF() {
-      const element = document.getElementById("content");
-      const opt = {
-        margin:       0.5,
-        filename:     'rauch-vokabeln.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
-      };
-      html2pdf().set(opt).from(element).save();
+        const element = document.getElementById("content");
+        window.scrollTo(0, 0); // تمرير الصفحة إلى الأعلى للتأكد من أنها جاهزة
+
+        // إعدادات للتأكد من التقسيم بشكل صحيح
+        const opt = {
+            margin:       1, // تقليل الهامش بين الصفحات
+            filename:     'teilzeitarbeit-vokabeln.pdf',
+            image:        { type: 'jpeg', quality: 0.92 },
+            html2canvas:  {
+                scale: 2, // زيادة الجودة للحصول على صورة أفضل
+                scrollY: 0,
+                useCORS: true,
+                logging: false
+            },
+            jsPDF:        {
+                unit: 'mm',
+                format: 'a4',
+                orientation: 'portrait',
+                autoOrientation: true,
+                pageSize: 'a4',
+                compress: true,
+                putOnlyUsedFonts: true, // تحسين حجم الـ PDF
+                floatPrecision: 16 // تحسين الدقة
+            }
+        };
+
+        html2pdf().set(opt).from(element).save();
     }
-  </script>
+</script>
 </body>
 </html>
