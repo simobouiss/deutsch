@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wichtige Vokabeln zum Thema Rauchen</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -11,10 +12,10 @@
       background-color: #f4f6f8;
       color: #333;
       padding: 20px;
-      direction: ltr; /* تغيير اتجاه النص من اليسار لليمين */
+      direction: ltr;
     }
     h1 {
-      text-align: center; /* محاذاة العنوان في المنتصف */
+      text-align: center;
       color: #004d66;
       border-bottom: 2px solid #ccc;
       padding-bottom: 5px;
@@ -51,7 +52,10 @@
     }
     .button-container {
       margin-top: 20px;
-      text-align: center; /* محاذاة الأزرار في المنتصف */
+      text-align: center;
+      display: flex;
+      justify-content: center; /* Centrer les boutons par défaut */
+      gap: 10px; /* Espace entre les boutons */
     }
     .print-btn, .pdf-btn, .nav-button {
       background-color: #2196f3;
@@ -61,7 +65,6 @@
       cursor: pointer;
       font-size: 16px;
       border-radius: 5px;
-      margin-left: 10px;
     }
     .print-btn:hover, .pdf-btn:hover, .nav-button:hover {
       background-color: #1976d2;
@@ -71,6 +74,19 @@
       font-size: 14px;
       color: #777;
       margin-top: 40px;
+    }
+
+    /* Media query pour les petits écrans (smartphones) */
+    @media (max-width: 768px) {
+      .button-container {
+        flex-direction: column; /* Empiler les boutons verticalement */
+        width: 100%; /* S'assurer que les boutons occupent toute la largeur */
+      }
+      .print-btn, .pdf-btn, .nav-button {
+        font-size: 14px; /* Réduire la taille des boutons */
+        padding: 8px 16px; /* Réduire les dimensions des boutons */
+        margin-bottom: 10px; /* Ajouter un espace entre les boutons */
+      }
     }
   </style>
 </head>
@@ -120,7 +136,6 @@
     <div class="sentence"><span class="de">Jugendliche beginnen oft früh zu rauchen...</span><br><span class="ar">الشباب غالبًا ما يبدأون التدخين مبكرًا...</span></div>
     <div class="sentence"><span class="de">Es ist wichtig, Jugendliche aufzuklären...</span><br><span class="ar">من المهم توعية الشباب...</span></div>
 
-    <!-- إضافة الموضوع هنا -->
     <div class="sentence" style="background-color: #e0f7fa; border-left: 5px solid #2196f3; padding: 20px;">
       <h3 style="color: #004d66; text-align: center;">Wie entwickelt sich Rauchen in Deutschland?</h3>
       <p style="color: #333;">Der Autor sagt, dass die Anzahl der gerauchten Zigaretten in Deutschland zunimmt. Außerdem beginnen die Jugendlichen oft früh zu rauchen, weil sie durch Freunde und Werbung beeinflusst werden.</p>
