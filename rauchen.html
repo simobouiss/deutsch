@@ -152,15 +152,110 @@
   </div>
 
   <div class="button-container">
+    <button class="nav-button" onclick="startTest()">🧪 TEST</button>
     <button class="nav-button" onclick="history.back()">🔙 BACK</button>
     <button class="nav-button" onclick="location.href='index.html'">🏠 HOME</button>
     <button class="print-btn" onclick="window.print()">🖨️ PRINT PAGE</button>
     <button class="pdf-btn" onclick="downloadPDF()">📥 DOWNLOAD PDF</button>
   </div>
 
+  <div id="test-section" style="display: none; background-color: #ffffff; border: 1px solid #ccc; padding: 20px; margin-top: 30px;">
+    <h2 style="text-align: center; color: #004d66;">🧠 Interaktiver Vokabeltest</h2>
+    <div id="test-question" style="font-size: 20px; text-align: center; margin-bottom: 20px;"></div>
+    <div id="test-options" style="text-align: center; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; align-items: center;"></div>
+    <div id="test-feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+  </div>
+
   <div class="footer">
     <p> by <strong>OuissDev</strong></p>
   </div>
+
+  <script>
+  const vocab = [
+    { de: "entwickeln", ar: "يتطور / يتغير" },
+    { de: "sagt", ar: "يقول" },
+    { de: "zunimmt", ar: "يزداد" },
+    { de: "beginnen", ar: "يبدأ" },
+    { de: "beeinflusst", ar: "يؤثر" },
+    { de: "aufzuklären", ar: "التوعية" },
+    { de: "verursachen", ar: "يسبب" },
+    { de: "schwächen", ar: "يضعف" },
+    { de: "schützen", ar: "يحمي" },
+    { de: "das Rauchen", ar: "التدخين" },
+    { de: "die Anzahl", ar: "العدد" },
+    { de: "die Zigaretten", ar: "السجائر" },
+    { de: "die Jugendlichen", ar: "الشباب" },
+    { de: "die Werbung", ar: "الإعلانات" },
+    { de: "die Gefahren", ar: "المخاطر" },
+    { de: "der Lungenkrebs", ar: "سرطان الرئة" },
+    { de: "die Unterstützung", ar: "الدعم" },
+    { de: "wichtig", ar: "مهم" },
+    { de: "früh", ar: "مبكرًا" },
+    { de: "wirklich", ar: "حقًا" },
+    { de: "infolgedessen", ar: "نتيجة لذلك" },
+    { de: "niemals", ar: "أبدًا" }
+  ];
+
+  let current = {};
+  let questionLang = "ar";
+
+  function startTest() {
+    document.getElementById("test-section").style.display = "block";
+    nextQuestion();
+  }
+
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  function nextQuestion() {
+    const randomIndex = Math.floor(Math.random() * vocab.length);
+    current = vocab[randomIndex];
+    questionLang = Math.random() > 0.5 ? "ar" : "de";
+
+    const correctAnswer = questionLang === "ar" ? current.de : current.ar;
+    const questionWord = questionLang === "ar" ? current.ar : current.de;
+    const label = questionLang === "ar" ? "💡 Was ist das auf Deutsch?" : "💡 ما ترجمة هذه الكلمة؟";
+
+    document.getElementById("test-question").innerHTML = `${label}<br><strong>${questionWord}</strong>`;
+
+    let options = [correctAnswer];
+    while (options.length < 4) {
+      const rand = vocab[Math.floor(Math.random() * vocab.length)];
+      const option = questionLang === "ar" ? rand.de : rand.ar;
+      if (!options.includes(option)) options.push(option);
+    }
+
+    options = shuffle(options);
+
+    const optionsContainer = document.getElementById("test-options");
+    optionsContainer.innerHTML = "";
+    options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt;
+      btn.style.padding = "10px 20px";
+      btn.style.margin = "5px";
+      btn.style.border = "1px solid #2196f3";
+      btn.style.borderRadius = "5px";
+      btn.style.backgroundColor = "#e3f2fd";
+      btn.style.cursor = "pointer";
+      btn.style.fontSize = "16px";
+      btn.onclick = () => checkAnswer(opt, correctAnswer);
+      optionsContainer.appendChild(btn);
+    });
+
+    document.getElementById("test-feedback").innerText = "";
+  }
+
+  function checkAnswer(selected, correct) {
+    if (selected === correct) {
+      document.getElementById("test-feedback").innerHTML = "Richtig ✅";
+      setTimeout(nextQuestion, 1000);
+    } else {
+      document.getElementById("test-feedback").innerHTML = "Falsch ❌";
+    }
+  }
+</script>
 
   <script>
     function downloadPDF() {
