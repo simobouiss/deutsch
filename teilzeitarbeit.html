@@ -195,63 +195,74 @@
 
   <script>
     const vocab = [
-  { de: "führen", ar: "يؤدي" },
-  { de: "bietet", ar: "يقدم" },
-  { de: "lernen", ar: "يتعلم" },
-  { de: "beziehen", ar: "يستمد" },
-  { de: "abzu-drucken", ar: "يتحرر" },
-  { de: "vereinen", ar: "يجمع" },
-  { de: "gibt", ar: "يوجد" },
-  { de: "machen", ar: "يجعل" },
-  { de: "hatte", ar: "كان لدي" },
-  { de: "überwiegt", ar: "يتفوق" },
-  { de: "Depression", ar: "اكتئاب" },
-  { de: "Unternehmen", ar: "شركات" },
-  { de: "Vorteil", ar: "ميزة" },
-  { de: "Effizienz", ar: "كفاءة" },
-  { de: "Aufgabenteilung", ar: "تقسيم المهام" },
-  { de: "Gefühl", ar: "شعور" },
-  { de: "Beruf", ar: "مهنة" },
-  { de: "Rollenbilder", ar: "صور نمطية" },
-  { de: "Teilzeitarbeit", ar: "العمل الجزئي" },
-  { de: "Einkommensmöglichkeiten", ar: "فرص الدخل" },
-  { de: "Karrierechancen", ar: "فرص العمل" },
-  { de: "Anerkennung", ar: "الاعتراف" },
-  { de: "Flexibilität", ar: "مرونة" },
-  { de: "Lebensqualität", ar: "جودة الحياة" },
-  { de: "Familie", ar: "عائلة" },
-  { de: "Teilzeit", ar: "العمل الجزئي" },
-  { de: "Männer", ar: "الرجال" }
-];
+      { de: "führen", ar: "يؤدي" },
+      { de: "bietet", ar: "يقدم" },
+      { de: "lernen", ar: "يتعلم" },
+      { de: "beziehen", ar: "يستمد" },
+      { de: "abzu-drucken", ar: "يتحرر" },
+      { de: "vereinen", ar: "يجمع" },
+      { de: "gibt", ar: "يوجد" },
+      { de: "machen", ar: "يجعل" },
+      { de: "hatte", ar: "كان لدي" },
+      { de: "überwiegt", ar: "يتفوق" },
+      { de: "Depression", ar: "اكتئاب" },
+      { de: "Unternehmen", ar: "شركات" },
+      { de: "Vorteil", ar: "ميزة" },
+      { de: "Effizienz", ar: "كفاءة" },
+      { de: "Aufgabenteilung", ar: "تقسيم المهام" },
+      { de: "Gefühl", ar: "شعور" },
+      { de: "Beruf", ar: "مهنة" },
+      { de: "Rollenbilder", ar: "صور نمطية" },
+      { de: "Teilzeitarbeit", ar: "العمل الجزئي" },
+      { de: "Einkommensmöglichkeiten", ar: "فرص الدخل" },
+      { de: "Karrierechancen", ar: "فرص العمل" },
+      { de: "Anerkennung", ar: "الاعتراف" },
+      { de: "Flexibilität", ar: "مرونة" },
+      { de: "Lebensqualität", ar: "جودة الحياة" },
+      { de: "Familie", ar: "عائلة" },
+      { de: "Teilzeit", ar: "العمل الجزئي" },
+      { de: "Männer", ar: "الرجال" }
+    ];
   
-    let current = {};
-    let questionLang = "ar";
-  
-    function startTest() {
-      document.getElementById("test-section").style.display = "block";
-      nextQuestion();
-    }
+    let shuffledVocab = [];
+    let currentIndex = 0;
   
     function shuffle(array) {
       return array.sort(() => Math.random() - 0.5);
     }
   
-    function nextQuestion() {
-      const randomIndex = Math.floor(Math.random() * vocab.length);
-      current = vocab[randomIndex];
-      questionLang = Math.random() > 0.5 ? "ar" : "de";
+    function startTest() {
+      shuffledVocab = shuffle([...vocab]); // ندير نسخة مخلوطة
+      currentIndex = 0;
+      document.getElementById("test-section").style.display = "block";
+      nextQuestion();
+    }
   
+    function nextQuestion() {
+      // لوصلنا لآخر الكلمة، نعاود نخلط
+      if (currentIndex >= shuffledVocab.length) {
+        shuffledVocab = shuffle([...vocab]);
+        currentIndex = 0;
+      }
+  
+      const current = shuffledVocab[currentIndex];
+      currentIndex++;
+  
+      const questionLang = Math.random() > 0.5 ? "ar" : "de";
       const correctAnswer = questionLang === "ar" ? current.de : current.ar;
       const questionWord = questionLang === "ar" ? current.ar : current.de;
-      const label = questionLang === "ar" ? "💡 Was ist das auf Deutsch?" : "💡 ما ترجمة هذه الكلمة؟";
+      const label = questionLang === "ar"
+        ? "💡 Was ist das auf Deutsch?"
+        : "💡 ما ترجمة هذه الكلمة؟";
   
-      document.getElementById("test-question").innerHTML = `${label}<br><strong>${questionWord}</strong>`;
+      document.getElementById("test-question").innerHTML =
+        `${label}<br><strong>${questionWord}</strong>`;
   
       let options = [correctAnswer];
       while (options.length < 4) {
         const rand = vocab[Math.floor(Math.random() * vocab.length)];
-        const option = questionLang === "ar" ? rand.de : rand.ar;
-        if (!options.includes(option)) options.push(option);
+        const opt = questionLang === "ar" ? rand.de : rand.ar;
+        if (!options.includes(opt)) options.push(opt);
       }
   
       options = shuffle(options);
@@ -284,6 +295,8 @@
       }
     }
   </script>
+  
+  
 
   <script>
     function downloadPDF() {
