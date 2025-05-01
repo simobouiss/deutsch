@@ -138,15 +138,9 @@
 
     <div class="sentence" style="background-color: #e0f7fa; border-left: 5px solid #2196f3; padding: 20px;">
       <h3 style="color: #004d66; text-align: center;">Wie entwickelt sich Rauchen in Deutschland?</h3>
-      <p style="color: #333;"> Der autor sagt, dass die Anzahl der gerauchten Zigaretten in Deutschland zunimmt, Außerdem
- beginnen die jugendlichen oft früh zu rauchen, weil sie durch Freunde und Werbung beenflusst.</p>
-      <p style="color: #333;"> Ich finde, dass es wichtig ist, jugendliche über die Gefahren des Rauchens aufzuklären. Rauchen
- kann wirklich viele krankenheiten wie Lungenkrebs und Herz probleme verursachen ,sowie das
- Immunsystem schwächen, aber infolgedessen sind aufklärung und unterstütsung nötig, um
- jugendliche vor diesem Risiken zu schützen.</p>
-      <p style="color: #333;">Mein freund hat früher geraucht und ist Leider an Lungenkrebs gestorben.sein schiksal hat mich
- Deutlich gemacht, dass Rauchen sehr gefährlich ist, deswegen Entschiede ich mich dass ich niemal
- mit dem rauchen an zufangen.</p>
+      <p style="color: #333;">Der Autor sagt, dass die Anzahl der gerauchten Zigaretten in Deutschland zunimmt. Außerdem beginnen die Jugendlichen oft früh zu rauchen, weil sie durch Freunde und Werbung beeinflusst werden.</p>
+      <p style="color: #333;">Ich finde, dass es wichtig ist, Jugendliche über die Gefahren des Rauchens aufzuklären. Rauchen kann wirklich viele Krankheiten wie Lungenkrebs und Herzprobleme verursachen, sowie das Immunsystem schwächen. Aber infolgedessen sind Aufklärung und Unterstützung nötig, um Jugendliche vor diesen Risiken zu schützen.</p>
+      <p style="color: #333;">Mein Freund hat früher geraucht und ist leider an Lungenkrebs gestorben. Sein Schicksal hat mich deutlich gemacht, dass Rauchen sehr gefährlich ist. Deswegen entschied ich mich, dass ich niemals mit dem Rauchen anfange.</p>
     </div>
 
   </div>
@@ -155,10 +149,12 @@
     <button class="nav-button" onclick="startTest()">🧪 TEST</button>
     <button class="nav-button" onclick="history.back()">🔙 BACK</button>
     <button class="nav-button" onclick="location.href='index.html'">🏠 HOME</button>
+    <button class="nav-button" onclick="showLoginModal()">🔐 Zugang</button>
     <button class="print-btn" onclick="window.print()">🖨️ PRINT PAGE</button>
     <button class="pdf-btn" onclick="downloadPDF()">📥 DOWNLOAD PDF</button>
   </div>
 
+  
   <div id="test-section" style="display: none; background-color: #ffffff; border: 1px solid #ccc; padding: 20px; margin-top: 30px;">
     <h2 style="text-align: center; color: #004d66;">🧠 Interaktiver Vokabeltest</h2>
     <div id="test-question" style="font-size: 20px; text-align: center; margin-bottom: 20px;"></div>
@@ -166,11 +162,70 @@
     <div id="test-feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
   </div>
 
+  <!-- نافذة إدخال كلمة المرور -->
+<div id="loginModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:9999;">
+  <div style="background:#fff; padding:30px; max-width:400px; margin:100px auto; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align:center;">
+    <h2>🔒 Passwort eingeben</h2>
+    <input type="password" id="passwordInput" placeholder="Passwort" style="padding:10px; font-size:16px; width:100%; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
+    <div style="display:flex; justify-content:space-between;">
+      <button class="nav-button" onclick="checkPassword()">Login</button>
+      <button class="nav-button" onclick="hideLoginModal()">Close</button>
+    </div>
+    <p id="loginError" style="color:red; margin-top:10px;"></p>
+  </div>
+</div>
+
+<!-- صفحة الأجوبة المخفية -->
+<div id="secretPage" style="display:none; padding:20px; background-color:#fff; margin-top:30px; border:2px solid #2196f3; border-radius:10px;">
+  <h2 style="text-align:center;">📘 Antworten zum Thema Rauchen</h2>
+  <div style="font-size:18px;">
+    🟠 1.<br>
+    ❓ Wann und warum beginnen viele Jugendliche zu rauchen? <br>
+    🌍 متى ولماذا يبدأ العديد من الشباب بالتدخين؟<br>
+    ✅ Viele Jugendliche beginnen heute wegen des Einflusses von Freunden und Werbung sehr früh in der Schule zu rauchen.<br>
+    🌍 العديد من الشباب يبدأون اليوم التدخين مبكرًا في المدرسة بسبب تأثير الأصدقاء والإعلانات.<br><br>
+
+    🟠 2.<br>
+    ❓ Was kann Rauchen verursachen und wie? <br>
+    🌍 ماذا يمكن أن يسبب التدخين وكيف؟<br>
+    ✅ Rauchen kann heutzutage durch regelmäßigen Tabakkonsum viele Krankheiten wie Lungenkrebs und Herzprobleme im Körper verursachen.<br>
+    🌍 التدخين يمكن أن يسبب اليوم من خلال الاستهلاك المنتظم للتبغ العديد من الأمراض مثل سرطان الرئة ومشاكل القلب في الجسم.<br><br>
+
+    🟠 3.<br>
+    ❓ Warum ist Aufklärung über Rauchen wichtig? <br>
+    🌍 لماذا التوعية حول التدخين مهمة؟<br>
+    ✅ Aufklärung ist heute wegen der steigenden Zahl rauchender Jugendlicher besonders dringend in der Gesellschaft nötig.<br>
+    🌍 التوعية اليوم ضرورية جدًا في المجتمع بسبب العدد المتزايد من الشباب المدخنين.<br><br>
+
+    🟠 4.<br>
+    ❓ Was ist mit deinem Freund passiert und wann? <br>
+    🌍 ماذا حدث لصديقك ومتى؟<br>
+    ✅ Mein Freund ist leider vor zwei Jahren wegen Lungenkrebs sehr plötzlich im Krankenhaus gestorben.<br>
+    🌍 صديقي توفي للأسف قبل عامين بسبب سرطان الرئة بشكل مفاجئ في المستشفى.<br><br>
+
+    🟠 5.<br>
+    ❓ Was hast du entschieden und warum? <br>
+    🌍 ماذا قررت ولماذا؟<br>
+    ✅ Ich habe mich vor langer Zeit wegen des Schicksals meines Freundes bewusst und entschlossen gegen das Rauchen in meinem Leben entschieden.<br>
+    🌍 لقد قررت منذ وقت طويل وبوعي أن لا أدخن أبدًا بسبب مصير صديقي.<br><br>
+
+    🟠 6.<br>
+    ❓ Wie beeinflusst Werbung das Rauchverhalten? <br>
+    🌍 كيف تؤثر الإعلانات على سلوك التدخين؟<br>
+    ✅ Werbung beeinflusst heutzutage durch emotionale Bilder sehr stark in sozialen Medien das Rauchverhalten von Jugendlichen.<br>
+    🌍 الإعلانات تؤثر اليوم بشكل قوي جدًا من خلال الصور العاطفية على سلوك التدخين لدى الشباب في وسائل التواصل الاجتماعي.<br><br>
+  </div>
+  <div style="text-align:center; margin-top:20px;">
+    <button class="nav-button" onclick="logout()">🔒 Logout</button>
+  </div>
+</div>
+
+
   <div class="footer">
     <p> by <strong>OuissDev</strong></p>
   </div>
 
-  <script>
+<script>
   const vocab = [
     { de: "entwickeln", ar: "يتطور / يتغير" },
     { de: "sagt", ar: "يقول" },
@@ -257,36 +312,48 @@
   }
 </script>
 
-  <script>
-    function downloadPDF() {
-        const element = document.getElementById("content");
-        window.scrollTo(0, 0); // تمرير الصفحة إلى الأعلى للتأكد من أنها جاهزة
+<script>
+  function showLoginModal() {
+    document.getElementById("loginModal").style.display = "block";
+  }
 
-        // إعدادات للتأكد من التقسيم بشكل صحيح
-        const opt = {
-            margin:       1, // تقليل الهامش بين الصفحات
-            filename:     'teilzeitarbeit-vokabeln.pdf',
-            image:        { type: 'jpeg', quality: 0.92 },
-            html2canvas:  {
-                scale: 2, // زيادة الجودة للحصول على صورة أفضل
-                scrollY: 0,
-                useCORS: true,
-                logging: false
-            },
-            jsPDF:        {
-                unit: 'mm',
-                format: 'a4',
-                orientation: 'portrait',
-                autoOrientation: true,
-                pageSize: 'a4',
-                compress: true,
-                putOnlyUsedFonts: true, // تحسين حجم الـ PDF
-                floatPrecision: 16 // تحسين الدقة
-            }
-        };
+  function hideLoginModal() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("loginError").innerText = "";
+    document.getElementById("passwordInput").value = "";
+  }
 
-        html2pdf().set(opt).from(element).save();
+  function checkPassword() {
+    const password = document.getElementById("passwordInput").value;
+    if (password === "140820") {
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("secretPage").style.display = "block";
+    } else {
+      document.getElementById("loginError").innerText = "❌ Falsches Passwort!";
     }
+  }
+
+  function logout() {
+    document.getElementById("secretPage").style.display = "none";
+  }
 </script>
+
+<script>
+  function downloadPDF() {
+    const element = document.getElementById("content");
+    window.scrollTo(0, 0); 
+
+    const opt = {
+      margin: 1, 
+      filename: 'teilzeitarbeit-vokabeln.pdf',
+      image: { type: 'jpeg', quality: 0.92 },
+      html2canvas: { scale: 2, scrollY: 0, useCORS: true, logging: false },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', pageSize: 'a4' }
+    };
+    
+    html2pdf().set(opt).from(element).save();
+  }
+</script>
+
 </body>
 </html>
