@@ -178,6 +178,7 @@
     <button class="nav-button" onclick="startTest()">🧪 TEST</button>
     <button class="nav-button" onclick="history.back()">🔙 BACK</button>
     <button class="nav-button" onclick="location.href='index.html'">🏠 HOME</button>
+    <button class="nav-button" onclick="showLoginModal()">🔐 Zugang</button>
     <button class="print-btn" onclick="window.print()">🖨️ PRINT PAGE</button>
     <button class="pdf-btn" onclick="downloadPDF()">📥 DOWNLOAD PDF</button>
   </div>
@@ -187,6 +188,68 @@
     <div id="test-question" style="font-size: 20px; text-align: center; margin-bottom: 20px;"></div>
     <div id="test-options" style="text-align: center; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; align-items: center;"></div>
     <div id="test-feedback" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+  </div>
+
+  <div id="loginModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:9999;">
+    <div style="background:#fff; padding:30px; max-width:400px; margin:100px auto; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); text-align:center;">
+      <h2>🔒 Passwort eingeben</h2>
+      <input type="password" id="passwordInput" placeholder="Passwort" style="padding:10px; font-size:16px; width:100%; margin-bottom:15px; border:1px solid #ccc; border-radius:5px;">
+      <div style="display:flex; justify-content:space-between;">
+        <button class="nav-button" onclick="checkPassword()">Login</button>
+        <button class="nav-button" onclick="hideLoginModal()">Close</button>
+      </div>
+      <p id="loginError" style="color:red; margin-top:10px;"></p>
+    </div>
+  </div>
+
+  <div id="secretPage" style="display:none; padding:20px; background-color:#fff; margin-top:30px; border:2px solid #2196f3; border-radius:10px;">
+    <h2 style="text-align:center;">📘 Antworten zum Thema Rauchen</h2>
+    <div style="font-size:18px;">
+      🟠 1.<br>
+    ❓ Wie wirkt sich Teilzeitarbeit auf Männer aus?<br>
+    🌍 كيف يؤثر العمل الجزئي على الرجال؟<br>
+    ✅ Teilzeitarbeit wirkt sich heutzutage wegen gesellschaftlicher Erwartungen oft negativ auf das Selbstwertgefühl im Berufsleben aus.<br>
+    🌍 العمل الجزئي يؤثر في الوقت الحاضر بشكل سلبي غالبًا على تقدير الذات في الحياة المهنية بسبب التوقعات الاجتماعية.<br><br>
+
+    🟠 2.<br>
+    ❓ Welche Vorteile hat Teilzeitarbeit für Unternehmen?<br>
+    🌍 ما هي فوائد العمل الجزئي بالنسبة للشركات؟<br>
+    ✅ Teilzeitarbeit bringt aktuell durch bessere Aufgabenverteilung und weniger Überlastung deutlich mehr Effizienz in vielen Unternehmen.<br>
+    🌍 العمل الجزئي يوفر حالياً كفاءة أكبر بوضوح في العديد من الشركات من خلال توزيع أفضل للمهام وتقليل الإرهاق.<br><br>
+
+    🟠 3.<br>
+    ❓ Was sollen Männer im Bezug auf Rollenbilder verstehen?<br>
+    🌍 ما الذي يجب أن يفهمه الرجال بخصوص الأدوار التقليدية؟<br>
+    ✅ Männer sollen heutzutage wegen des psychischen Drucks bewusst und reflektiert Abstand von traditionellen Rollenbildern im Alltag nehmen.<br>
+    🌍 يجب على الرجال اليوم أن يبتعدوا بوعي وتفكير عن الصور التقليدية للأدوار بسبب الضغط النفسي في حياتهم اليومية.<br><br>
+
+    🟠 4.<br>
+    ❓ Was sind Nachteile der Teilzeitarbeit?<br>
+    🌍 ما هي سلبيات العمل الجزئي؟<br>
+    ✅ Teilzeitarbeit führt oft wegen des niedrigeren Gehalts zu eingeschränkten Karrierechancen im Berufsleben.<br>
+    🌍 العمل الجزئي يؤدي غالباً إلى فرص مهنية محدودة في الحياة المهنية بسبب الأجر المنخفض.<br><br>
+
+    🟠 5.<br>
+    ❓ Warum hast du dich für Teilzeitarbeit entschieden?<br>
+    🌍 لماذا قررت العمل الجزئي؟<br>
+    ✅ Ich habe mich vor zwei Jahren wegen meiner Familie bewusst und freiwillig für Teilzeitarbeit im öffentlichen Dienst entschieden.<br>
+    🌍 قررت قبل عامين عن وعي وبإرادتي أن أعمل جزئياً في القطاع العام بسبب عائلتي.<br><br>
+
+    🟠 6.<br>
+    ❓ Wie war deine Erfahrung mit Teilzeitarbeit?<br>
+    🌍 كيف كانت تجربتك مع العمل الجزئي؟<br>
+    ✅ Die Erfahrung war in den letzten Jahren trotz einiger Herausforderungen insgesamt sehr positiv in meinem Alltag.<br>
+    🌍 التجربة كانت خلال السنوات الأخيرة إيجابية جداً بشكل عام في حياتي اليومية، رغم بعض التحديات.<br><br>
+
+    🟠 7.<br>
+    ❓ Was hat dich am meisten beeinflusst?<br>
+    🌍 ما الذي أثر فيك أكثر؟<br>
+    ✅ Die Zeit mit meiner Familie hat vor allem wegen der gemeinsamen Erlebnisse sehr stark in meinem Denken gewirkt.<br>
+    🌍 الوقت اللي قضيتو مع عائلتي أثّر فيّ كثيراً، خصوصاً بسبب اللحظات المشتركة، في طريقة تفكيري.<br><br>
+    </div>
+    <div style="text-align:center; margin-top:20px;">
+      <button class="nav-button" onclick="logout()">🔒 Logout</button>
+    </div>
   </div>
 
   <div class="footer">
@@ -295,6 +358,32 @@
       }
     }
   </script>
+
+<script>
+  function showLoginModal() {
+    document.getElementById("loginModal").style.display = "block";
+  }
+
+  function hideLoginModal() {
+    document.getElementById("loginModal").style.display = "none";
+    document.getElementById("loginError").innerText = "";
+    document.getElementById("passwordInput").value = "";
+  }
+
+  function checkPassword() {
+    const password = document.getElementById("passwordInput").value;
+    if (password === "140820") {
+      document.getElementById("loginModal").style.display = "none";
+      document.getElementById("secretPage").style.display = "block";
+    } else {
+      document.getElementById("loginError").innerText = "❌ Falsches Passwort!";
+    }
+  }
+
+  function logout() {
+    document.getElementById("secretPage").style.display = "none";
+  }
+</script>
   
   
 
